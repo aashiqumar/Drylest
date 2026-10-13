@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drylest (Pvt) Ltd · Software company, Sri Lanka</title>
+<meta name="description" content="Drylest (Pvt) Ltd is a software company in Matale, Sri Lanka, incorporated in 2023. We build Vault, the administration and finance platform for community service clubs.">
+<meta name="theme-color" content="#14151F">
+<link rel="canonical" href="https://drylest.site/">
+<meta property="og:title" content="Drylest (Pvt) Ltd">
+<meta property="og:description" content="Software company in Matale, Sri Lanka. Makers of Vault.">
+<meta property="og:url" content="https://drylest.site/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+  :root {
+    --ink: #14151F; --paper: #F7F6F2; --white: #FFFFFF; --line: #E5E2DA;
+    --muted: #5C6070; --accent: #1F6E5A; --vault: #D91E5C;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.6 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  header { border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; }
+  .mark { width: 30px; height: 30px; border-radius: 6px; background: var(--ink); display: grid; place-items: center; }
+  nav a { text-decoration: none; font-weight: 600; font-size: 15px; color: var(--muted); margin-left: 22px; }
+  nav a:hover { color: var(--ink); }
+
+  .hero { padding: 88px 0 72px; }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+  h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 800; margin: 0; max-width: 820px; }
+  .lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 640px; margin: 22px 0 0; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 15px; }
+  .btn-ink { background: var(--ink); color: var(--white); }
+  .btn-ink:hover { background: #2A2C3B; }
+  .btn-line { border: 1px solid var(--line); background: var(--white); }
+  .btn-line:hover { border-color: var(--ink); }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(26px, 3.6vw, 34px); letter-spacing: -0.025em; line-height: 1.15; margin: 0 0 12px; font-weight: 800; }
+  .sub { color: var(--muted); max-width: 620px; margin: 0; }
+
+  .product { margin-top: 32px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); background: var(--white); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .product .body { padding: 32px; }
+  .vault { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 34px; letter-spacing: -0.03em; line-height: 1; margin: 0; }
+  .vault span { color: var(--vault); }
+  .product .body p { color: var(--muted); margin: 14px 0 0; }
+  .product .body .vault { color: var(--ink); margin: 0; }
+  .product ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .product li { display: flex; gap: 10px; font-size: 15px; }
+  .product li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--vault); margin-top: 9px; flex-shrink: 0; }
+  .product .side { background: var(--ink); color: var(--white); padding: 32px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .side .k { font-size: 13px; color: rgba(255,255,255,.6); margin: 0; }
+  .side .v { font-size: 17px; font-weight: 700; margin: 2px 0 0; }
+  .side a.btn { background: var(--vault); color: var(--white); align-self: flex-start; }
+
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: start; }
+  dl { margin: 0; background: var(--white); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  dl div { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 16px; padding: 14px 20px; border-top: 1px solid var(--line); }
+  dl div:first-child { border-top: 0; }
+  dt { color: var(--muted); font-size: 14px; }
+  dd { margin: 0; font-weight: 600; font-size: 15px; overflow-wrap: anywhere; }
+
+  .founder { display: flex; gap: 18px; align-items: flex-start; }
+  .avatar { width: 56px; height: 56px; border-radius: 8px; background: var(--accent); color: var(--white); display: grid; place-items: center; font-weight: 800; font-size: 19px; flex-shrink: 0; }
+  .founder p { margin: 6px 0 0; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 14px; color: var(--muted); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+  @media (max-width: 760px) {
+    nav a:not(:last-child) { display: none; }
+    .hero { padding: 56px 0 48px; }
+    .product, .grid2 { grid-template-columns: 1fr; }
+    .grid2 { gap: 32px; }
+    dl div { grid-template-columns: 1fr; gap: 2px; }
+    .product .body, .product .side { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Drylest home">
+      <span class="mark" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 2h5.2C11.9 2 14 4.6 14 8s-2.1 6-5.8 6H3z" fill="none" stroke="#fff" stroke-width="2.2"/></svg>
+      </span>
+      Drylest
+    </a>
+    <nav aria-label="Main">
+      <a href="#product">Product</a>
+      <a href="#company">Company</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero"><div class="wrap">
+    <p class="eyebrow">Software company · Matale, Sri Lanka · Since 2023</p>
+    <h1>We build software that takes the paperwork off people who do good work.</h1>
+    <p class="lead">Drylest (Pvt) Ltd designs and runs Vault, the administration and finance platform for community service clubs. We start with Rotaract in Sri Lanka and are building for clubs worldwide.</p>
+    <div class="cta">
+      <a class="btn btn-ink" href="https://vaultpro.cloud">See Vault →</a>
+      <a class="btn btn-line" href="#contact">Contact us</a>
+    </div>
+  </div></div>
+
+  <section id="product">
+    <div class="wrap">
+      <h2>Our product</h2>
+      <p class="sub">Volunteer clubs run on spreadsheets, chat threads and paper. Vault replaces them with one place for the work.</p>
+      <div class="product">
+        <div class="body">
+          <p class="vault">Vault<span>.</span></p>
+          <p>A multi-tenant platform where every club gets its own private workspace, with its own members, records and governance.</p>
+          <ul>
+            <li>Member directory with dues and RI clearance</li>
+            <li>Treasury with EXCO approvals and audit-ready reports</li>
+            <li>Events, digital attendance and guided project reports</li>
+            <li>An approval inbox with a permanent audit trail</li>
+          </ul>
+        </div>
+        <div class="side">
+          <div>
+            <p class="k">Status</p>
+            <p class="v">In pilot with the Rotaract Club of Matale</p>
+          </div>
+          <div>
+            <p class="k">Pricing</p>
+            <p class="v">Free for clubs during early access</p>
+          </div>
+          <a class="btn" href="https://vaultpro.cloud">vaultpro.cloud →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company">
+    <div class="wrap grid2">
+      <div>
+        <h2>The company</h2>
+        <p class="sub">Drylest is an independent, founder-funded software company registered in Sri Lanka.</p>
+        <div class="founder" style="margin-top: 28px">
+          <span class="avatar" aria-hidden="true">AU</span>
+          <div>
+            <strong>Mohamad Rizwan Ashiq Umar</strong>
+            <p>Founder and CEO. Software developer and member of the Rotaract Club of Matale, building the tools he wished his own club had.</p>
+          </div>
+        </div>
+      </div>
+      <dl>
+        <div><dt>Legal name</dt><dd>Drylest (Pvt) Ltd</dd></div>
+        <div><dt>Incorporated</dt><dd>2023, Sri Lanka</dd></div>
+        <div><dt>Based in</dt><dd>Matale, Sri Lanka</dd></div>
+        <div><dt>Product</dt><dd><a href="https://vaultpro.cloud">Vault · vaultpro.cloud</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="sub">For partnerships, clubs and anything else, email us and we'll reply within two working days.</p>
+      <div class="cta">
+        <a class="btn btn-ink" href="mailto:hello@drylest.site">hello@drylest.site</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Drylest (Pvt) Ltd · Matale, Sri Lanka</span>
+    <span>Vault is a product of Drylest (Pvt) Ltd</span>
+  </div>
+</footer>
+
+</body>
+</html>
