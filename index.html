@@ -152,6 +152,18 @@
   .step p { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
   @keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(14,124,102,0); } }
 
+  /* clients */
+  .clients { border-top: 1px solid var(--line); }
+  .client-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .client-card { background: var(--white); padding: 44px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; transition: background-color .15s; }
+  .client-card:hover { background: var(--paper); }
+  .client-card img { max-height: 52px; width: auto; object-fit: contain; border-radius: 8px; }
+  .client-mark { font-size: 30px; line-height: 1; }
+  .client-mark.nadiya { font-family: 'Brush Script MT', 'Segoe Script', cursive; font-style: italic; font-weight: 600; color: #E22D2D; text-shadow: 1.5px 1.5px 0 rgba(120,160,200,.45); }
+  .client-mark.rotaract { font-family: var(--sans); font-weight: 800; letter-spacing: -.02em; color: #CE1372; }
+  .client-mark.rotaract small { display: block; font-weight: 600; font-size: 14px; letter-spacing: 0; margin-top: 2px; color: #CE1372; opacity: .85; }
+  .client-name { font-size: 13px; font-weight: 600; color: var(--muted); }
+
   /* company */
   .company { border-top: 1px solid var(--line); }
   .co-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
@@ -198,7 +210,7 @@
     .nav.open { background: var(--night); border-color: var(--night-line); }
     .nav.open .nav-links { display: flex; flex-direction: column; position: absolute; top: calc(68px + env(safe-area-inset-top)); left: 0; right: 0; background: var(--night); padding: 8px 16px 20px; border-bottom: 1px solid var(--night-line); gap: 2px; }
     .nav.open .nav-links a { font-size: 17px; padding: 14px 12px; }
-    .features, .p-grid { grid-template-columns: 1fr; }
+    .features, .p-grid, .client-grid { grid-template-columns: 1fr; }
     .split, .co-grid { grid-template-columns: 1fr; gap: 40px; }
     .road { grid-template-columns: 1fr; gap: 32px; }
     .road::before { left: 11px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
@@ -242,6 +254,7 @@
       <a href="#product">Product</a>
       <a href="#principles">How we build</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#clients">Clients</a>
       <a href="#company">Company</a>
     </nav>
     <a class="btn btn-light btn-sm nav-cta" href="#contact">Contact</a>
@@ -410,6 +423,31 @@
     </div>
   </section>
 
+  <!-- Clients -->
+  <section class="clients" id="clients">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Beyond Vault</p>
+        <h2>We also build custom software, one client at a time.</h2>
+        <p class="sub">Alongside Vault, Drylest designs and builds tailored systems for businesses and organisations — staff portals, booking and payment tracking, brand sites and more.</p>
+      </div>
+      <div class="client-grid reveal">
+        <div class="client-card">
+          <img src="/assets/img/clients/prince-driving-school.png" width="120" height="120" alt="Prince Driving School logo" loading="lazy">
+          <span class="client-name">Prince Driving School</span>
+        </div>
+        <div class="client-card">
+          <span class="client-mark nadiya">Nadiya's</span>
+          <span class="client-name">Nadiya's</span>
+        </div>
+        <div class="client-card">
+          <span class="client-mark rotaract">Rotaract<small>Matale</small></span>
+          <span class="client-name">Rotaract Club of Matale</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Company -->
   <section class="company" id="company">
     <div class="wrap co-grid">
@@ -471,7 +509,7 @@
       </div>
       <div>
         <h4>Company</h4>
-        <ul><li><a href="#principles">How we build</a></li><li><a href="#roadmap">Roadmap</a></li><li><a href="#company">Company details</a></li></ul>
+        <ul><li><a href="#principles">How we build</a></li><li><a href="#roadmap">Roadmap</a></li><li><a href="#clients">Clients</a></li><li><a href="#company">Company details</a></li></ul>
       </div>
       <div>
         <h4>Contact</h4>
