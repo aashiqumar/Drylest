@@ -174,10 +174,50 @@
   function wireConsultationForm() {
     const form = $("#consultation-form");
     if (!form) return;
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      $("#form-note").hidden = false;
+      const name = ($("#f-name") ? $("#f-name").value : "").trim();
+      const phone = ($("#f-phone") ? $("#f-phone").value : "").trim();
+      const email = ($("#f-email") ? $("#f-email").value : "").trim();
+      const service = ($("#f-service") ? $("#f-service").value : "").trim();
+      const msg = ($("#f-message") ? $("#f-message").value : "").trim();
+
+      const firmName = (S.firm && S.firm.name) || "Apex Law Chambers";
+      const firmPhone = (S.firm && S.firm.phone) || "+94770872373";
+      const digits = firmPhone.replace(/\D/g, "");
+      const waTarget = digits.startsWith("94") ? digits : (digits.startsWith("0") ? "94" + digits.slice(1) : "94" + digits);
+
+      let waText = `Hello ${firmName},\n\nI would like to request an initial consultation regarding a legal matter.\n\n*Name:* ${name || "Client"}\n*Phone:* ${phone || "Not specified"}`;
+      if (email) waText += `\n*Email:* ${email}`;
+      if (service) waText += `\n*Practice Area:* ${service}`;
+      if (msg) waText += `\n*Details:* ${msg}`;
+
+      const waUrl = `https://wa.me/${waTarget}?text=${encodeURIComponent(waText)}`;
+      const note = $("#form-note");
+      if (note) {
+        note.hidden = false;
+        note.textContent = "✓ Opening WhatsApp chat with our chambers...";
+      }
+      window.open(waUrl, "_blank");
     });
+
+    const mailBtn = $("#btn-submit-mail");
+    if (mailBtn) {
+      mailBtn.addEventListener("click", function () {
+        const name = ($("#f-name") ? $("#f-name").value : "").trim();
+        const phone = ($("#f-phone") ? $("#f-phone").value : "").trim();
+        const email = ($("#f-email") ? $("#f-email").value : "").trim();
+        const service = ($("#f-service") ? $("#f-service").value : "").trim();
+        const msg = ($("#f-message") ? $("#f-message").value : "").trim();
+
+        const firmEmail = (S.firm && S.firm.email) || "hello@drylest.site";
+        const subject = encodeURIComponent(`Legal Consultation Request: ${service || "General Inquiry"} - ${name || "Client"}`);
+        const body = encodeURIComponent(`Dear Counsel,\n\nI would like to request an initial legal consultation.\n\nName: ${name || "Client"}\nPhone: ${phone || "Not specified"}\nEmail: ${email || "Not specified"}\nPractice Area: ${service || "General"}\n\nDetails:\n${msg || "No details provided"}\n`);
+
+        window.location.href = `mailto:${firmEmail}?subject=${subject}&body=${body}`;
+      });
+    }
   }
 
   function renderBlog() {

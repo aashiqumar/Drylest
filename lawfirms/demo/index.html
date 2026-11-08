@@ -138,7 +138,7 @@
       </div>
     </section>
 
-    <!-- ============ CONSULTATION FORM ============ -->
+    <!-- ============ CONSULTATION FORM & DIRECT CHANNELS ============ -->
     <section class="consultation-section" id="contact">
       <div class="consultation-bg" aria-hidden="true"><img src="images/consultation-bg.png" alt=""></div>
       <div class="wrap consultation-grid">
@@ -152,40 +152,68 @@
           </div>
           <h2 id="consultation-heading"></h2>
           <p id="consultation-paragraph"></p>
+
+          <!-- Direct Instant Action Buttons -->
+          <div class="consultation-quick-actions">
+            <a href="https://wa.me/94770872373?text=Hello%2C%20I%20would%20like%20to%20request%20an%20initial%20consultation%20with%20Apex%20Law%20Chambers." target="_blank" class="quick-action-btn quick-action-wa">
+              <span class="action-icon">💬</span>
+              <div>
+                <strong>WhatsApp Chambers</strong>
+                <span>Instant Reply • 077 087 2373</span>
+              </div>
+            </a>
+            <a href="tel:+94770872373" class="quick-action-btn quick-action-phone">
+              <span class="action-icon">📞</span>
+              <div>
+                <strong>Call Chamber</strong>
+                <span>+94 77 087 2373</span>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <form class="consultation-form reveal" id="consultation-form">
-          <div class="form-row-pair">
-            <div class="form-field">
-              <label for="f-name">Name</label>
-              <input type="text" id="f-name" name="name" placeholder="Your Name" required>
+        <div class="consultation-form-wrap reveal">
+          <form class="consultation-form" id="consultation-form">
+            <div class="form-header">
+              <h3>Direct Consultation Request</h3>
+              <p>Connect with our attorneys via WhatsApp or Email without delays.</p>
+            </div>
+            <div class="form-row-pair">
+              <div class="form-field">
+                <label for="f-name">Full Name</label>
+                <input type="text" id="f-name" name="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-field">
+                <label for="f-phone">Mobile / WhatsApp</label>
+                <input type="tel" id="f-phone" name="phone" placeholder="Your Phone Number" required>
+              </div>
+            </div>
+            <div class="form-row-pair">
+              <div class="form-field">
+                <label for="f-email">Email Address</label>
+                <input type="email" id="f-email" name="email" placeholder="Your Email">
+              </div>
+              <div class="form-field">
+                <label for="f-service">Practice Area</label>
+                <select id="f-service" name="service"></select>
+              </div>
             </div>
             <div class="form-field">
-              <label for="f-phone">Phone</label>
-              <input type="tel" id="f-phone" name="phone" placeholder="Your Phone" required>
+              <label for="f-message">Brief Details of Legal Matter</label>
+              <textarea id="f-message" name="message" rows="3" placeholder="Briefly describe what you need assistance with..."></textarea>
             </div>
-          </div>
-          <div class="form-row-pair">
-            <div class="form-field">
-              <label for="f-email">Email</label>
-              <input type="email" id="f-email" name="email" placeholder="Your Email" required>
+
+            <div class="form-submit-group">
+              <button type="submit" class="btn-wa-submit">
+                <span>💬 Send Request via WhatsApp</span>
+              </button>
+              <button type="button" id="btn-submit-mail" class="btn-secondary">
+                <span>✉️ Or Send via Email</span>
+              </button>
             </div>
-            <div class="form-field">
-              <label for="f-service">Service</label>
-              <select id="f-service" name="service"></select>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="f-subject">Subject</label>
-            <input type="text" id="f-subject" name="subject" placeholder="Subject">
-          </div>
-          <div class="form-field">
-            <label for="f-message">Message</label>
-            <textarea id="f-message" name="message" rows="4" placeholder="Message"></textarea>
-          </div>
-          <button type="submit" class="btn btn-block">Request consultation</button>
-          <p class="form-note" id="form-note" hidden>Thanks — this is a demo form and isn't wired to send yet. Hook it up to your email or a form service before launch.</p>
-        </form>
+            <p class="form-note" id="form-note" hidden></p>
+          </form>
+        </div>
       </div>
     </section>
 

@@ -93,8 +93,8 @@ window.SITE = {
   consultation: {
     heading: "Request a free consultation",
     paragraph:
-      "Adipiscing nam neque hendrerit nec pellentesque diam a. Varius quisque odio mauris lectus consequat sed. Pretium purus feugiat volutpat pellentesque. Potenti porta mauris nec vulputate.",
-    services: ["Civil Law", "Family Law", "Business Law", "Real Estate", "Corporate Law"],
+      "Need immediate legal guidance or counsel? Connect directly with our attorneys via WhatsApp or phone, or submit your details below for a prompt review.",
+    services: ["Civil Law & Litigation", "Corporate & Commercial", "Real Estate & Property Law", "Family & Matrimonial", "Banking & Finance", "Criminal Defence"],
   },
 
   blog: {
