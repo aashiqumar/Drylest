@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">About Us — Law Firm</title>
+  <meta id="meta-description" name="description" content="">
+  <meta name="robots" content="index, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="icons/logo-justice.svg">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json" id="schema-ld"></script>
+</head>
+<body data-page="about">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <section class="page-hero" id="page-hero">
+    <div class="page-hero-bg" aria-hidden="true"><img src="images/about-hero.png" alt=""><div class="bg-glow" aria-hidden="true"><span class="blob blob-1"></span><span class="blob blob-2"></span><span class="blob blob-3"></span></div></div>
+      <canvas class="particles-canvas" aria-hidden="true"></canvas>
+    <header class="site-header" id="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-icon" aria-hidden="true">
+            <img src="icons/logo-vector.svg" alt="">
+            <img src="icons/logo-justice.svg" alt="">
+          </span>
+          <span class="brand-name" id="brand-name">Law Firm</span>
+        </a>
+        <nav class="main-nav" id="main-nav" aria-label="Primary">
+          <ul id="nav-list"></ul>
+        </nav>
+        <div class="header-actions" style="display:flex;align-items:center;gap:20px;">
+          <a class="header-phone" id="header-phone" href="#">
+            <img src="icons/phone-icon.svg" alt="">
+            <span id="header-phone-text"></span>
+          </a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <h1 class="reveal"></h1>
+  </section>
+
+  <main id="main">
+
+    <!-- ============ ATTORNEYS ============ -->
+    <section class="attorneys-section" id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="attorneys-heading"></h2>
+          <p id="attorneys-subheading"></p>
+        </div>
+        <div class="attorneys-grid" id="attorneys-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ VIDEO BANNER ============ -->
+    <section class="video-section">
+      <div class="video-bg" aria-hidden="true"><img src="images/about-video.png" alt=""></div>
+      <div class="video-copy reveal">
+        <button class="video-play" type="button" aria-label="Play video"><img src="icons/icon-play.svg" alt=""></button>
+        <h2 id="video-heading"></h2>
+        <p id="video-subtext"></p>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section class="about-stats">
+      <div class="wrap about-stats-grid" id="about-stats-grid"></div>
+    </section>
+
+    <!-- ============ ADVOCACY SPLIT ============ -->
+    <section class="advocacy-section">
+      <div class="wrap advocacy-grid">
+        <div class="advocacy-copy reveal">
+          <h2 id="advocacy-heading"></h2>
+          <p id="advocacy-paragraph"></p>
+          <a class="btn" id="advocacy-cta" href="contact.html" style="margin-top:24px;">Learn more</a>
+        </div>
+        <div class="advocacy-photo reveal"><img src="images/about-advocacy.png" alt=""></div>
+      </div>
+    </section>
+
+    <!-- ============ PROTECT SPLIT (progress bars) ============ -->
+    <section class="protect-section">
+      <div class="wrap protect-grid">
+        <div class="protect-photo reveal"><img src="images/consultation-bg.png" alt=""></div>
+        <div class="protect-copy reveal">
+          <h2 id="protect-heading"></h2>
+          <p id="protect-paragraph"></p>
+          <div class="progress-list" id="progress-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BLOG ============ -->
+    <section class="blog-section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="blog-heading"></h2>
+          <p id="blog-subheading"></p>
+        </div>
+        <div class="blog-grid" id="blog-grid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-bg" aria-hidden="true"><img src="images/footer-bg.png" alt=""></div>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="index.html">
+          <span class="brand-icon" aria-hidden="true">
+            <img src="icons/footer-logo-vector.svg" alt="">
+            <img src="icons/footer-logo-justice.svg" alt="">
+          </span>
+          <span class="brand-name" id="footer-brand-name">Law Firm</span>
+        </a>
+        <p id="footer-blurb"></p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><img src="icons/footer-facebook.svg" alt=""></a>
+          <a href="#" aria-label="Twitter"><img src="icons/footer-x-overlay.svg" alt=""></a>
+          <a href="#" aria-label="Instagram"><img src="icons/footer-instagram.svg" alt=""></a>
+          <a href="#" aria-label="Telegram"><img src="icons/footer-telegram.svg" alt=""></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Practice Areas</h3>
+        <ul id="footer-practice-list"></ul>
+      </div>
+      <div class="footer-col">
+        <h3>Find Us</h3>
+        <ul>
+          <li id="footer-address"></li>
+          <li><a id="footer-phone" href="#"></a></li>
+          <li><a id="footer-email" href="#"></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Links</h3>
+        <ul id="footer-links-list"></ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><p id="footer-copyright"></p></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/render-about.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
