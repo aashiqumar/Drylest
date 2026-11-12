@@ -1,43 +1,10 @@
-/* animations.js — Lenis for buttery smooth/inertia scrolling, GSAP +
-   ScrollTrigger for scroll-linked reveals, synced to Lenis's own raf loop
-   so scroll-driven animation never lags behind the smoothed scroll. */
+/* animations.js — GSAP-driven motion. Runs after render.js, so every
+   dynamically-built card (.reveal, .tilt-card, .stat-number) already
+   exists in the DOM by the time this executes. */
 (function () {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isTouch = window.matchMedia("(max-width: 900px)").matches || "ontouchstart" in window;
+  const isTouch = window.matchMedia("(max-width: 860px)").matches || "ontouchstart" in window;
   const hasGSAP = typeof gsap !== "undefined";
-  const hasLenis = typeof Lenis !== "undefined";
-
-  /* ---------- Smooth scroll (desktop; native momentum is already fine
-     on touch, so Lenis is skipped there to keep phones fast) ---------- */
-  let lenis = null;
-  if (hasLenis && !reduceMotion && !isTouch) {
-    lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => 1 - Math.pow(1 - t, 4), // quart-out: smooth, no bounce
-      smoothWheel: true,
-    });
-    if (hasGSAP) {
-      lenis.on("scroll", ScrollTrigger.update);
-      gsap.ticker.add((time) => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      requestAnimationFrame(function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      });
-    }
-
-    // Smooth-scroll same-page anchor links through Lenis instead of the
-    // browser's instant jump.
-    document.querySelectorAll('a[href^="#"]').forEach((a) => {
-      a.addEventListener("click", (e) => {
-        const target = document.querySelector(a.getAttribute("href"));
-        if (!target) return;
-        e.preventDefault();
-        lenis.scrollTo(target, { offset: -20, duration: 1.3 });
-      });
-    });
-  }
 
   /* ---------- Nav: mobile toggle + scroll shrink ---------- */
   const navToggle = document.getElementById("nav-toggle");
@@ -57,62 +24,57 @@
 
   const header = document.getElementById("site-header");
   if (header) {
-    const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 60);
+    const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
     document.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
 
-  if (!hasGSAP) return; // CSS alone keeps the page fully usable without GSAP/Lenis
+  if (!hasGSAP) return; // CSS alone keeps the page fully usable without GSAP
 
   gsap.registerPlugin(ScrollTrigger);
-  if (lenis) ScrollTrigger.defaults({ scroller: window });
 
   /* ---------- Hero entrance ---------- */
-  gsap
-    .timeline({ defaults: { ease: reduceMotion ? "power1.out" : "back.out(1.5)" } })
-    .from(".hero-copy .reveal, .hero > .btn, .hero-trust", {
+  const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  heroTl
+    .from(".hero-copy .reveal", {
       opacity: 0,
-      y: 30,
-      scale: reduceMotion ? 1 : 0.94,
-      duration: reduceMotion ? 0 : 0.85,
+      y: 24,
+      duration: reduceMotion ? 0 : 0.8,
       stagger: reduceMotion ? 0 : 0.12,
     })
-    .from(".trusted-card", { opacity: 0, y: 44, scale: reduceMotion ? 1 : 0.96, duration: reduceMotion ? 0 : 0.85 }, "-=0.3");
+    .from(
+      ".hero-bg__photo",
+      { opacity: 0, scale: 1.08, duration: reduceMotion ? 0 : 1.4, ease: "power2.out" },
+      "-=0.6"
+    )
+    .from(".scroll-cue", { opacity: 0, duration: 0.6 }, "-=0.3");
 
-  /* ---------- Scroll reveals for singular elements ---------- */
-  const heroHandled = new Set(document.querySelectorAll(".hero-copy .reveal, .hero > .btn, .hero-trust, .trusted-card"));
-  document.querySelectorAll(".reveal").forEach((elx) => {
-    if (heroHandled.has(elx)) return;
+  /* ---------- Scroll reveals for everything below the hero ---------- */
+  document.querySelectorAll(".section .reveal").forEach((elx) => {
     gsap.from(elx, {
       opacity: 0,
-      y: 36,
-      scale: reduceMotion ? 1 : 0.92,
-      duration: reduceMotion ? 0 : 0.8,
-      ease: reduceMotion ? "power1.out" : "back.out(1.6)",
+      y: 28,
+      duration: reduceMotion ? 0 : 0.7,
+      ease: "power2.out",
       scrollTrigger: { trigger: elx, start: "top 88%", once: true },
     });
   });
 
-  /* ---------- Staggered grids: a fluid "pop" as each card lands ---------- */
-  [
-    ".services-grid", ".attorneys-grid", ".blog-grid",
-    ".steps-grid", ".practice-grid", ".plans-grid", ".faq-list",
-    ".about-stats-grid", ".contact-details-grid",
-  ].forEach((sel) => {
+  /* ---------- Staggered card grids ---------- */
+  [".services-grid", ".attorneys-grid", ".testimonials-track"].forEach((sel) => {
     const grid = document.querySelector(sel);
     if (!grid) return;
     gsap.from(grid.children, {
       opacity: 0,
-      y: 34,
-      scale: reduceMotion ? 1 : 0.88,
-      duration: reduceMotion ? 0 : 0.7,
-      stagger: reduceMotion ? 0 : 0.09,
-      ease: reduceMotion ? "power1.out" : "back.out(1.7)",
+      y: 24,
+      duration: reduceMotion ? 0 : 0.6,
+      stagger: reduceMotion ? 0 : 0.1,
+      ease: "power2.out",
       scrollTrigger: { trigger: grid, start: "top 85%", once: true },
     });
   });
 
-  /* ---------- Animated counters (About page stats) ---------- */
+  /* ---------- Animated counters ---------- */
   document.querySelectorAll(".stat-number").forEach((numEl) => {
     const target = parseFloat(numEl.dataset.count);
     const counter = { val: 0 };
@@ -125,34 +87,45 @@
     });
   });
 
-  /* ---------- Progress bars (About page) ---------- */
-  document.querySelectorAll(".progress-fill").forEach((bar) => {
-    const pct = parseFloat(bar.dataset.percent) || 0;
-    gsap.to(bar, {
-      width: pct + "%",
-      duration: reduceMotion ? 0 : 1.2,
-      ease: "power2.out",
-      scrollTrigger: { trigger: bar, start: "top 90%", once: true },
+  /* ---------- Hero photo: subtle parallax drift toward the cursor ---------- */
+  const hero = document.querySelector(".hero");
+  const heroPhoto = document.querySelector(".hero-bg__photo");
+  if (hero && heroPhoto && !reduceMotion && !isTouch) {
+    hero.addEventListener("mousemove", (e) => {
+      const rect = hero.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      gsap.to(heroPhoto, {
+        x: px * -16,
+        y: py * -10,
+        duration: 0.6,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
     });
-  });
+    hero.addEventListener("mouseleave", () => {
+      gsap.to(heroPhoto, { x: 0, y: 0, duration: 0.8 });
+    });
+  }
 
-  /* ---------- FAQ answer height recalculation after GSAP/open state ---------- */
-  document.querySelectorAll(".faq-item.is-open .faq-answer").forEach((a) => {
-    requestAnimationFrame(() => (a.style.maxHeight = a.scrollHeight + "px"));
-  });
-
-  /* ---------- Subtle parallax on full-bleed background photos ---------- */
-  if (!reduceMotion) {
-    document.querySelectorAll(".hero-bg img, .banner-bg img, .consultation-bg img, .footer-bg img, .page-hero-bg img, .video-bg img, .faq-bg img").forEach((img) => {
-      gsap.to(img, {
-        yPercent: 8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: img.closest("section, footer"),
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.6,
-        },
+  /* ---------- Card tilt ---------- */
+  if (!reduceMotion && !isTouch) {
+    document.querySelectorAll(".tilt-card").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(card, {
+          rotateY: px * 8,
+          rotateX: -py * 8,
+          transformPerspective: 700,
+          duration: 0.3,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      });
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5 });
       });
     });
   }
