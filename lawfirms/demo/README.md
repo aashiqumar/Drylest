@@ -1,9 +1,9 @@
-# Law Firm Template — ours, built from scratch
+# Law Firm Template — "The Case File"
 
 No third-party template *code* — fully custom HTML/CSS/JS. Two stock
-photos (`images/`) now live here under the free Unsplash License (no
-attribution required, free for commercial use) — see "Image credits"
-below. Built to be re-skinned for a new client in minutes.
+photos (`images/`) under the free Unsplash License (no attribution
+required, free for commercial use) — see "Image credits" below.
+Built to be re-skinned for a new client in minutes.
 
 ## To launch a new client's site
 
@@ -12,66 +12,78 @@ below. Built to be re-skinned for a new client in minutes.
    phone/WhatsApp/email/address, hero copy, practice areas, about text,
    attorneys, testimonials, footer. **This one file is the whole content
    of the site.** Nothing else needs touching for a standard launch.
-3. Update `<title>`/description defaults if needed — they're also driven
-   by `content.js` (`SITE.meta`), so step 2 usually covers this too.
-4. Update `robots.txt` and `sitemap.xml` with the real domain once one
-   exists.
-5. Deploy the folder as-is to Netlify/Vercel/any static host, or point the
-   client's domain at it.
+3. Swap the two photos in `images/` for the client's own if they have
+   usable ones. Keep the filenames and nothing else needs changing.
+4. Update `robots.txt` and `sitemap.xml` with the real domain.
+5. Deploy the folder as-is to Netlify/Vercel/any static host.
 
 ## Structure
 
 - `index.html` — the page shell: semantic markup, empty containers
-  (`#services-grid`, `#attorneys-grid`, etc.) that `render.js` fills in.
+  (`#practice-list`, `#counsel-list`, etc.) that `render.js` fills in.
 - `js/content.js` — **edit this per client.** The single content object.
-- `js/render.js` — reads `content.js` and builds the page. Only touch this
-  if you're changing the site's *structure* (e.g. adding a new section
-  type), not its content.
-- `js/animations.js` — GSAP/ScrollTrigger: hero entrance, scroll reveals,
-  animated counters, the 3D hero scale, card tilt. Respects
-  `prefers-reduced-motion` and disables mouse-tilt on touch devices.
+- `js/render.js` — reads `content.js` and builds the page. Only touch
+  this if you're changing the site's *structure*, not its content.
+- `js/animations.js` — GSAP/ScrollTrigger: the hero load sequence, a
+  scroll parallax on the hero photo, scroll reveals, and the register
+  counters. Respects `prefers-reduced-motion`; the counters also run
+  without GSAP so the numbers never sit at zero.
 - `css/styles.css` — design tokens at the top (`:root`), then layout and
-  components. Colors, fonts and spacing are all tokens — change the
-  palette for a client by editing the `:root` block once.
+  components. Change the palette for a client by editing `:root` once.
 
-## Design notes
+## The design
 
-- Fonts: Fraunces (display, serif) + Inter (body, sans) — loaded from
-  Google Fonts with `display=swap` so text never blocks render. Good
-  typography and fast load both help search ranking; neither replaces
-  actual SEO work (see below).
-- Hero is a full-bleed photographic backdrop (`images/hero-chambers.jpg`)
-  under a navy scrim, with a subtle cursor-parallax drift on desktop
-  (disabled on touch / `prefers-reduced-motion`). The about section pairs
-  a photo (`images/about-lawbooks.jpg`) with a floating brass-trimmed
-  stat card — swap either image per client for a more premium, editorial
-  feel than the previous CSS-only hero.
-- Attorney cards still use initials instead of headshots (no AI-generated
-  "fake person" photos — avoids any deceptive-imagery question). Swap in
-  real client photos if they have them (add an `<img>` in `render.js`'s
-  `renderAttorneys()`, keyed off a `photo` field you add to `content.js`).
+Studied against how world-class firms actually present themselves
+(Cravath, Wachtell, Paul Weiss, Kirkland & Ellis). What they share:
+serif display type, severe restraint, architectural photography, hairline
+rules, and leading with proof rather than adjectives. What they skip —
+and a small firm can't — is conversion, so this template adds a
+persistent tap-to-call, a free-consultation CTA repeated three times, and
+trust figures above the fold.
+
+**Concept: a bound legal brief.** Black covers (ink bands) alternate with
+paper leaves (parchment bands), bound by hairline rules, indexed with
+typed reference labels, and marked with the oxblood of the red tape that
+ties a brief shut. The palette is drawn from the artefacts of the
+practice — robe black, deed parchment, red tape — rather than the
+navy-and-gold every other law firm template reaches for.
+
+**Signature element:** the parchment "brief panel" laid across the bottom
+edge of the hero photograph, like a brief set down on a desk.
+
+**Type:** Libre Caslon Display + Text (Caslon is the historic face of
+English law printing, which is the tradition Sri Lankan practice
+inherits), Archivo for UI and body, and Courier Prime for the reference
+labels — the typewriter face of legal documents.
+
+**Practice areas are a docket, not a card grid.** A firm's practice is a
+record of what it is instructed on, so it's set as a numbered record with
+the courts listed under each entry.
+
+Attorney cards use initials, not headshots — and deliberately no
+AI-generated faces, which would present invented people as real staff.
+Swap in real client photos when they have them.
 
 ## Image credits
 
 Both photos are from Unsplash, used under the Unsplash License (free for
 commercial use, no attribution legally required — credited here anyway):
 
-- `images/hero-chambers.jpg` — Mathew Schwartz, "Brown building with
-  lighted chandeliers" (University of Michigan Law Library reading room).
+- `images/hero-colonnade.jpg` — Adrien Delforge, "Stone columns in
+  Brussels Palace of Justice."
 - `images/about-lawbooks.jpg` — Abhishek Tiwari, "A row of very old,
   worn-out books on a shelf" (antique Chancery Division law reports).
 
 Generic/stock, not a specific client's real chambers — swap for a real
-client's own photos before launch, same as any other placeholder here.
+client's own photos before launch where possible.
 
 ## SEO scaffolding already in place
 
 - `<title>` and meta description driven by `content.js`, per client.
 - `Attorney`/`LocalBusiness`-style JSON-LD schema, auto-generated from
-  `content.js` (`renderMeta()` in `render.js`) — helps Google understand
-  this is a real local law firm.
+  `content.js` (`renderMeta()` in `render.js`).
 - Semantic heading structure (one `<h1>`, `<h2>` per section).
-- `robots.txt` + `sitemap.xml` stubs — fill in the real domain before launch.
+- `robots.txt` + `sitemap.xml` stubs — fill in the real domain.
 
 What this template does NOT do (no template can): rank a site on its own.
 Actual ranking depends on the domain's age/authority, real content volume,

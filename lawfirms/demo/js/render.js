@@ -13,16 +13,18 @@
     if (html !== undefined) n.innerHTML = html;
     return n;
   };
-  const telHref = (p) => "tel:" + p.replace(/\s+/g, "");
-  const waHref = (p) => {
-    const digits = p.replace(/\D/g, "");
-    return "https://wa.me/" + digits;
+  const setText = (sel, value) => {
+    const node = $(sel);
+    if (node) node.textContent = value;
   };
+  const telHref = (p) => "tel:" + p.replace(/\s+/g, "");
+  const waHref = (p) => "https://wa.me/" + p.replace(/\D/g, "");
+  const pad = (n) => String(n).padStart(2, "0");
 
   function renderMeta() {
     document.title = S.meta.title;
     document.documentElement.lang = S.meta.lang || "en";
-    $("#page-title").textContent = S.meta.title;
+    setText("#page-title", S.meta.title);
     $("#meta-description").setAttribute("content", S.meta.description);
     $("#og-title").setAttribute("content", S.meta.title);
     $("#og-description").setAttribute("content", S.meta.description);
@@ -46,17 +48,17 @@
     $("#schema-ld").textContent = JSON.stringify(schema, null, 2);
   }
 
-  function renderHeader() {
+  function renderMasthead() {
     const initials = S.firm.shortName || S.firm.name.slice(0, 2).toUpperCase();
-    $("#brand-mark").textContent = initials;
-    $("#footer-brand-mark").textContent = initials;
-    $("#brand-name").textContent = S.firm.name;
-    $("#footer-brand-name").textContent = S.firm.name;
-    $("#brand-tagline").textContent = S.firm.tagline;
-    $("#footer-brand-tagline").textContent = S.firm.tagline;
+    setText("#brand-mark", initials);
+    setText("#footer-brand-mark", initials);
+    setText("#brand-name", S.firm.name);
+    setText("#footer-brand-name", S.firm.name);
+    setText("#brand-tagline", S.firm.tagline);
+    setText("#footer-brand-tagline", S.firm.tagline);
 
     $("#header-phone").setAttribute("href", telHref(S.firm.phone));
-    $("#header-phone-text").textContent = S.firm.phone;
+    setText("#header-phone-text", S.firm.phone);
 
     const navList = $("#nav-list");
     S.nav.forEach((item) => {
@@ -69,90 +71,97 @@
   }
 
   function renderHero() {
-    $("#hero-eyebrow").textContent = S.hero.eyebrow;
-    $("#hero-headline-text").textContent = S.hero.headline + " ";
-    $("#hero-sub").textContent = S.hero.subcopy;
+    setText("#hero-ref", S.hero.reference);
+    setText("#hero-headline", S.hero.headline);
+    setText("#hero-sub", S.hero.subcopy);
+    setText("#hero-caption", S.hero.photoCaption);
 
-    const primary = $("#hero-cta-primary");
-    primary.textContent = S.hero.primaryCta.label;
-    primary.href = S.hero.primaryCta.href;
-    const secondary = $("#hero-cta-secondary");
-    secondary.textContent = S.hero.secondaryCta.label;
-    secondary.href = S.hero.secondaryCta.href;
+    const cta = $("#hero-cta");
+    cta.textContent = S.hero.primaryCta.label;
+    cta.href = S.hero.primaryCta.href;
 
-    // Rotating word — simple fade/slide cycle, no extra library needed.
-    const rotateEl = $("#hero-rotate");
-    const words = S.hero.rotatingWords;
-    let i = 0;
-    rotateEl.textContent = words[0];
-    setInterval(() => {
-      i = (i + 1) % words.length;
-      rotateEl.classList.add("is-swapping");
-      setTimeout(() => {
-        rotateEl.textContent = words[i];
-        rotateEl.classList.remove("is-swapping");
-      }, 300);
-    }, 2600);
-  }
+    const phone = $("#hero-phone");
+    phone.textContent = S.firm.phone;
+    phone.href = telHref(S.firm.phone);
 
-  function renderStats() {
-    const grid = $("#stats-grid");
+    const register = $("#register");
     S.stats.forEach((stat) => {
-      const item = el("div", "stat-item");
-      item.innerHTML = `<span class="stat-number" data-count="${stat.number}">0</span><span class="stat-suffix">${stat.suffix}</span><span class="stat-label">${stat.label}</span>`;
-      grid.appendChild(item);
+      const li = el("li");
+      li.innerHTML =
+        '<span class="register__num" data-count="' + stat.number + '">0</span>' +
+        '<span class="register__label">' + stat.label + "</span>";
+      li.querySelector(".register__num").dataset.suffix = stat.suffix || "";
+      register.appendChild(li);
     });
   }
 
-  const ICONS = { scale: "icon-scale", home: "icon-home", briefcase: "icon-briefcase", heart: "icon-heart" };
+  function renderPractice() {
+    setText("#practice-label", S.practice.label);
+    setText("#practice-heading", S.practice.heading);
+    setText("#practice-intro", S.practice.intro);
 
-  function renderServices() {
-    const grid = $("#services-grid");
-    S.services.forEach((svc) => {
-      const card = el("div", "service-card tilt-card");
-      card.innerHTML = `
-        <div class="service-icon"><svg class="icon" viewBox="0 0 24 24"><use href="#${ICONS[svc.icon] || "icon-scale"}"/></svg></div>
-        <h3>${svc.title}</h3>
-        <p>${svc.description}</p>`;
-      grid.appendChild(card);
+    const list = $("#practice-list");
+    S.services.forEach((svc, i) => {
+      const row = el("li", "docket__row reveal");
+      row.innerHTML =
+        '<span class="docket__index">' + pad(i + 1) + "</span>" +
+        '<h3 class="docket__title">' + svc.title + "</h3>" +
+        '<div class="docket__body"><p>' + svc.description + "</p>" +
+        (svc.detail ? '<span class="docket__detail">' + svc.detail + "</span>" : "") +
+        "</div>";
+      list.appendChild(row);
     });
   }
 
   function renderAbout() {
-    $("#about-eyebrow").textContent = S.about.eyebrow;
-    $("#about-heading").textContent = S.about.heading;
+    setText("#about-label", S.about.label);
+    setText("#about-heading", S.about.heading);
+    setText("#about-caption", S.about.photoCaption);
+
     const paras = $("#about-paragraphs");
     S.about.paragraphs.forEach((p) => paras.appendChild(el("p", null, p)));
+
     const bullets = $("#about-bullets");
     S.about.bullets.forEach((b) => bullets.appendChild(el("li", null, b)));
-    $("#about-years").textContent = S.firm.yearsInPractice + "+";
   }
 
-  function renderAttorneys() {
-    const grid = $("#attorneys-grid");
-    S.attorneys.forEach((person) => {
-      const card = el("div", "attorney-card tilt-card");
-      card.innerHTML = `
-        <div class="attorney-avatar">${person.initials}</div>
-        <h3>${person.name}</h3>
-        <p class="attorney-role">${person.role}</p>
-        <p class="attorney-bio">${person.bio}</p>`;
-      grid.appendChild(card);
+  function renderCounsel() {
+    setText("#attorneys-label", S.attorneys.label);
+    setText("#attorneys-heading", S.attorneys.heading);
+
+    const list = $("#counsel-list");
+    S.attorneys.people.forEach((person) => {
+      const li = el("li", "reveal");
+      li.innerHTML =
+        '<span class="counsel__mark" aria-hidden="true">' + person.initials + "</span>" +
+        '<h3 class="counsel__name">' + person.name + "</h3>" +
+        '<p class="counsel__role">' + person.role + " · " + person.area + "</p>" +
+        '<p class="counsel__bio">' + person.bio + "</p>";
+      list.appendChild(li);
     });
   }
 
-  function renderTestimonials() {
-    const track = $("#testimonials-track");
-    S.testimonials.forEach((t) => {
-      const card = el("div", "testimonial-card");
-      card.innerHTML = `
-        <p class="testimonial-quote">&ldquo;${t.quote}&rdquo;</p>
-        <p class="testimonial-name">${t.name} <span>&mdash; ${t.context}</span></p>`;
-      track.appendChild(card);
+  function renderQuotes() {
+    setText("#testimonials-label", S.testimonials.label);
+    setText("#testimonials-heading", S.testimonials.heading);
+
+    const list = $("#quotes-list");
+    S.testimonials.items.forEach((t) => {
+      const li = el("li", "reveal");
+      li.innerHTML =
+        "<figure>" +
+        "<blockquote>&ldquo;" + t.quote + "&rdquo;</blockquote>" +
+        "<figcaption>" + t.name + " · " + t.context + "</figcaption>" +
+        "</figure>";
+      list.appendChild(li);
     });
   }
 
   function renderContact() {
+    setText("#contact-label", S.contact.label);
+    setText("#contact-heading", S.contact.heading);
+    setText("#contact-intro", S.contact.intro);
+
     const phoneEl = $("#contact-phone");
     phoneEl.href = telHref(S.firm.phone);
     phoneEl.textContent = S.firm.phone;
@@ -165,21 +174,23 @@
     emailEl.href = "mailto:" + S.firm.email;
     emailEl.textContent = S.firm.email;
 
-    $("#contact-address").textContent = S.firm.address;
-    $("#contact-hours").textContent = S.firm.hoursWeekday + " · " + S.firm.hoursSaturday;
+    setText("#contact-address", S.firm.address);
+    setText("#contact-hours", S.firm.hoursWeekday + " · " + S.firm.hoursSaturday);
 
-    document.getElementById("consultation-form").addEventListener("submit", function (e) {
+    const note = $("#form-note");
+    note.textContent = S.contact.formNote;
+    $("#consultation-form").addEventListener("submit", function (e) {
       e.preventDefault();
-      document.getElementById("form-note").hidden = false;
+      note.hidden = false;
     });
   }
 
-  function renderFooter() {
-    $("#footer-blurb").textContent = S.footer.blurb;
+  function renderColophon() {
+    setText("#footer-blurb", S.footer.blurb);
     const list = $("#footer-practice-list");
     S.footer.practiceAreas.forEach((area) => list.appendChild(el("li", null, area)));
 
-    $("#footer-address").textContent = S.firm.address;
+    setText("#footer-address", S.firm.address);
     const fp = $("#footer-phone");
     fp.href = telHref(S.firm.phone);
     fp.textContent = S.firm.phone;
@@ -187,27 +198,24 @@
     fe.href = "mailto:" + S.firm.email;
     fe.textContent = S.firm.email;
 
-    $("#footer-year").textContent = new Date().getFullYear();
-    $("#footer-copyright-name").textContent = S.firm.name;
+    setText("#footer-year", new Date().getFullYear());
+    setText("#footer-copyright-name", S.firm.name);
   }
 
   function renderPoweredBy() {
-    var badge = document.createElement("span");
-    badge.className = "powered-by-badge";
-    badge.textContent = "Powered by Drylest Private Limited";
+    const badge = el("span", "powered-by-badge", "Powered by Drylest Private Limited");
     document.body.appendChild(badge);
   }
 
   renderMeta();
-  renderHeader();
+  renderMasthead();
   renderHero();
-  renderStats();
-  renderServices();
+  renderPractice();
   renderAbout();
-  renderAttorneys();
-  renderTestimonials();
+  renderCounsel();
+  renderQuotes();
   renderContact();
-  renderFooter();
+  renderColophon();
   renderPoweredBy();
 
   document.dispatchEvent(new CustomEvent("site:rendered"));
