@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy · Drylest Shorts Publisher</title>
+<meta name="description" content="Privacy policy for Drylest Shorts Publisher, Drylest's internal tool for publishing videos to its own YouTube channels.">
+<meta name="theme-color" content="#0B0D12">
+<link rel="canonical" href="https://drylest.site/privacy/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+  @font-face { font-family: 'Jakarta'; font-weight: 400; font-display: swap; src: url('/assets/fonts/plus-jakarta-sans-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Jakarta'; font-weight: 700; font-display: swap; src: url('/assets/fonts/plus-jakarta-sans-latin-700-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Jakarta'; font-weight: 800; font-display: swap; src: url('/assets/fonts/plus-jakarta-sans-latin-800-normal.woff2') format('woff2'); }
+  :root {
+    --night: #0B0D12; --paper: #F7F6F2; --ink: #12141B; --line: #E4E1D9;
+    --muted: #5A5F70; --teal: #0E7C66;
+    --sans: 'Jakarta', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+  header { background: var(--night); padding: 20px 16px; }
+  header a { color: #fff; text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -.02em; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 72px; }
+  h1 { font-size: clamp(28px, 6vw, 40px); line-height: 1.15; letter-spacing: -.03em; margin: 0 0 8px; font-weight: 800; }
+  h2 { font-size: 20px; letter-spacing: -.01em; margin: 36px 0 8px; font-weight: 700; }
+  p, li { color: var(--ink); }
+  .meta { color: var(--muted); margin: 0 0 32px; }
+  a { color: var(--teal); }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; }
+  footer { border-top: 1px solid var(--line); margin-top: 48px; padding-top: 20px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<header><a href="/">Drylest</a></header>
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="meta">Drylest Shorts Publisher · Effective 20 November 2026</p>
+
+  <p>Drylest Shorts Publisher is an internal tool operated by Drylest (Pvt) Ltd
+  (company no. PV 00269952, Matale, Sri Lanka). It creates short educational
+  videos and publishes them to YouTube channels that Drylest owns. It is not
+  offered to the public, and only Drylest's own Google account signs in to it.</p>
+
+  <h2>What data the tool accesses</h2>
+  <p>Through Google OAuth, the tool requests access to the YouTube account that
+  signs in to it, using the YouTube Data API. It uses that access only to:</p>
+  <ul>
+    <li>upload videos to the authorised channel and set their title, description, tags and publishing schedule;</li>
+    <li>read basic details of the authorised channel and of the videos it uploaded, to confirm uploads succeeded;</li>
+    <li>delete videos it uploaded by mistake.</li>
+  </ul>
+  <p>The tool does not access, collect or store data about YouTube viewers, other
+  channels or any other Google services.</p>
+
+  <h2>How data is stored and protected</h2>
+  <p>The OAuth access token for Drylest's account is stored as an encrypted secret
+  in a private repository and on Drylest's own computers. It is used only to run
+  the tool, and is never sold, shared or used for advertising.</p>
+
+  <h2>Third-party services</h2>
+  <p>To make videos, the tool sends the video topic and script text (never Google
+  account data) to: Google Gemini (script writing and fact-checking), ElevenLabs
+  (voice-over), and fetches images from Wikimedia Commons, Openverse, Imgflip and
+  GIPHY.</p>
+
+  <h2>YouTube API Services</h2>
+  <p>This tool uses YouTube API Services. By using it you agree to the
+  <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>, and
+  Google's handling of data is described in the
+  <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.
+  Drylest's use of information received from Google APIs adheres to the
+  <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+  including the Limited Use requirements.</p>
+
+  <h2>Revoking access</h2>
+  <p>Access can be revoked at any time from
+  <a href="https://myaccount.google.com/permissions">Google Account permissions</a>.
+  Revoking access stops the tool from uploading; Drylest then deletes the stored token.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="mailto:hello@drylest.site">hello@drylest.site</a>.</p>
+
+  <footer>© Drylest (Pvt) Ltd</footer>
+</main>
+</body>
+</html>
